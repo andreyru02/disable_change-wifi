@@ -40,17 +40,10 @@ async def menu(call: types.CallbackQuery):
         await bot.send_message(call.from_user.id, 'Подключено к SIK!')
         os.system("nmcli c up SIK")
     elif call.data == 'connect-talakan':
-        await bot.send_message(call.from_user.id, 'Подключение к TalakanOnline...')
+        await bot.send_message(call.from_user.id, 'Подключено к TalakanOnline!')
         os.system("nmcli c up TalakanOnline")
         sleep(5)
-        result = authentication(inet_login=inet_login, inet_password=inet_password, mac=mac)  # выполняем авторизацию
-        sleep(5)
-        if result is True:
-            await bot.send_message(call.from_user.id, 'Авторизация пройдена, подключение выполнено.',
-                                   reply_markup=keyboard)
-        else:
-            await bot.send_message(call.from_user.id, 'Вы уже авторизированны с данного логина.\n'
-                                                      'Попробуйте повторить через ~8 минут.', reply_markup=keyboard)
+        authentication(inet_login=inet_login, inet_password=inet_password, mac=mac)  # выполняем авторизацию
     else:
         await bot.send_message(call.from_user.id, 'Неизвестная команда!', reply_markup=keyboard)
 
